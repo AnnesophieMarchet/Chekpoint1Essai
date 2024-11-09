@@ -1,1 +1,5 @@
-<p>video-list works!</p>
+<div>
+  @for (video of videos$ | async; track $index) {
+  <app-video-card [video]="video"></app-video-card>
+  }
+</div>
