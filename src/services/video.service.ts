@@ -12,18 +12,20 @@ export class VideoService {
 
   constructor(private http: HttpClient) {}
 
+  //Retourne la liste complète des vidéos
   getVideoList$(): Observable<Video[]> {
     return this.http
       .get<{ videos: Video[] }>(this.API_LOCAL_JSON)
       .pipe(map((response) => response.videos));
   }
 
+  //Retourne la liste complète des vidéos.
   getVideoById$(url: string): Observable<Video | undefined> {
     return this.getVideoList$().pipe(
       map((videos) => videos.find((video) => video.url === url))
     );
   }
-
+  //Retourne une liste filtrée de vidéos en fonction d'une chaîne de caractères
   filteredVideoList$(chosenVideo: string): Observable<Video[]> {
     return this.getVideoList$().pipe(
       map((videos) =>
