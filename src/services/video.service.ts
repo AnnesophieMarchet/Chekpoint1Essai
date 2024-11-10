@@ -19,11 +19,13 @@ export class VideoService {
       .pipe(map((response) => response.videos));
   }
 
-  //Retourne la liste complète des vidéos.
-  getVideoById$(url: string): Observable<Video | undefined> {
-    return this.getVideoList$().pipe(
-      map((videos) => videos.find((video) => video.url === url))
-    );
+  // Retourne une vidéo par ID
+  getVideoById$(id: number): Observable<Video | undefined> {
+    return this.http
+      .get<{ videos: Video[] }>(this.API_LOCAL_JSON)
+      .pipe(
+        map((response) => response.videos.find((video) => video.id === id))
+      );
   }
   //Retourne une liste filtrée de vidéos en fonction d'une chaîne de caractères
   filteredVideoList$(chosenVideo: string): Observable<Video[]> {

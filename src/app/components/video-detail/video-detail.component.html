@@ -1,0 +1,31 @@
+<div *ngIf="video">
+  <div class="video-detail-container">
+    <h1>{{ video.title }}</h1>
+    <p><strong>Chaîne :</strong> {{ video.channelName }}</p>
+    <p><strong>Vues :</strong> {{ video.nbViews }}</p>
+    <p><strong>Publié le :</strong> {{ video.uploadDate }}</p>
+    <p><strong>Likes :</strong> {{ video.likes }}</p>
+    <p><strong>Catégories :</strong> {{ video.categories.join(", ") }}</p>
+    <img [src]="video.imgSrc" alt="{{ video.title }}" class="video-thumbnail" />
+
+    <p><a [href]="video.url" target="_blank">Voir sur YouTube</a></p>
+
+    <div *ngIf="video.comments.length > 0">
+      <h3>Commentaires :</h3>
+      <ul>
+        <li *ngFor="let comment of video.comments">
+          <p>
+            <strong>{{ comment.author }} :</strong> {{ comment.content }}
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="video.comments.length === 0">
+      <p>Aucun commentaire pour cette vidéo.</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!video">
+  <p>Vidéo non trouvée.</p>
+</div>
